@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>isinconvexset</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-07-29"><meta name="DC.source" content="doc.m"><style type="text/css">
+      --><title>isinconvexset</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2023-01-22"><meta name="DC.source" content="doc.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -66,23 +66,24 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1>isinconvexset</h1><!--introduction--><p>Function to check if a vertex is located inside or outside a given convex set, boundary not included (opened set). Supports dimensions 2 and 3.</p><p>Author &amp; support : nicolas.douillet (at) free.fr, 2018-2020.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">See also</a></li><li><a href="#4">Input arguments</a></li><li><a href="#5">Output argument</a></li><li><a href="#6">Example #1 : 2D convex hull of random point cloud</a></li><li><a href="#7">Example #2 : 3D convex hull of random point cloud</a></li></ul></div><h2 id="1">Syntax</h2><p>isin = isinconvexset(V, H, M);</p><h2 id="2">Description</h2><p>isin = isinconvexset(V, H, M) computes the boolean isin which is true/logical 1 in the case the vertex M belongs to the opened convex set (V,H) defined by the vertex set V, and its hyperplane set H. isin is false/logical 0 in the case vertex M belongs to the complementary set or the boundary convex hull.</p><h2 id="3">See also</h2><p><a href="https://fr.mathworks.com/help/matlab/ref/convhull.html?s_tid=srchtitle">convhull</a></p><h2 id="4">Input arguments</h2><pre>      [ |  |  |]
+  </style></head><body><div class="content"><h1>isinconvexset</h1><!--introduction--><p>Function to check if a vertex is located inside or outside a given convex set, boundary not included (opened set). Supports dimensions 2 and 3.</p><p>Author &amp; support : nicolas.douillet (at) free.fr, 2018-2023.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">See also</a></li><li><a href="#4">Input arguments</a></li><li><a href="#5">Output argument</a></li><li><a href="#6">Example #1 : 2D convex hull of random point cloud</a></li><li><a href="#7">Example #2 : 3D convex hull of random point cloud</a></li></ul></div><h2 id="1">Syntax</h2><p>isin = isinconvexset(V, H, M);</p><h2 id="2">Description</h2><p>isin = isinconvexset(V, H, M) computes the boolean isin which is true/logical 1 in the case the vertex M belongs to the opened convex set (V,H) defined by the vertex set V, and its hyperplane set H. isin is false/logical 0 in the case vertex M belongs to the complementary set or the boundary convex hull.</p><h2 id="3">See also</h2><p>| <a href="https://fr.mathworks.com/help/matlab/ref/convhull.html?s_tid=srchtitle">convhull</a> |   <a href="https://fr.mathworks.com/matlabcentral/fileexchange/122962-isinside2dset">isinside2dset</a> |   <a href="https://fr.mathworks.com/help/matlab/ref/inpolygon.html?searchHighlight=inpolygon&amp;s_tid=srchtitle_inpolygon_1">inpolygon</a> |</p><h2 id="4">Input arguments</h2><pre>      [ |  |  |]
 - V = [Vx Vy Vz], real matrix double, the convex set, with size(V,1) &gt; size(V,2) to define a relevant convex set.
       [ |  |  |]</pre><pre>      [ |  |]
-- H = [i1 i2], positive integer matrix double, the hyperplane set (edge list in 2D, face list in 3D). Size(H) = [nb_hyperplanes,2].
-      [ |  |]</pre><pre>      [ |  |  |]
+- H = [i1 i2], positive integer matrix double, the hyperplane set (edge list in 2D, face list in 3D).
+      [ |  |]</pre><pre>              H elements / rows don't need to be coherently oriented. Size(H) = [nb_hyperplanes,2].</pre><pre>      [ |  |  |]
 - M = [Mx My Mz], real row vector or matrix double, the coordinates of the vertex / vertices  to check. Size(M,2) = size(V,2).
       [ |  |  |]</pre><h2 id="5">Output argument</h2><pre>         [      |      ]
 - isin = [logical 1 / 0], logical true (1)/false (0) scalar / column vector. The boolean result. Size(isin) = [size(M,1),1].
-         [      |      ]</pre><h2 id="6">Example #1 : 2D convex hull of random point cloud</h2><pre class="codeinput">N = 16;
+         [      |      ]</pre><h2 id="6">Example #1 : 2D convex hull of random point cloud</h2><pre class="codeinput">N = 28;
 V = 2*(rand(N,2)-0.5);
 H_raw = convhull(V);
 nh = numel(H_raw);
 H = repelem(H_raw',cat(2,1,2*ones(1,nh-2),1));
 H = reshape(H,[2,nh-1])';
-[A B] = meshgrid(-1:0.1:1);
+[A, B] = meshgrid(-1:0.1:1);
 M = cat(2,A(:),B(:));
 isin = isinconvexset(V,H,M);
+
 figure
 line(V(H_raw,1),V(H_raw,2),<span class="string">'Color'</span>,[0 0 1],<span class="string">'LineWidth'</span>,2), hold <span class="string">on</span>;
 ColorSpec = num2cell(cat(2,~isin,isin,zeros(size(isin,1),1)),2);
@@ -92,11 +93,12 @@ xlabel(<span class="string">'X'</span>), ylabel(<span class="string">'Y'</span>)
 axis <span class="string">equal</span>, axis <span class="string">tight</span>;
 </pre><img vspace="5" hspace="5" src="doc_01.png" alt=""> <h2 id="7">Example #2 : 3D convex hull of random point cloud</h2><pre class="codeinput">N = 32;
 V = 2*(rand(N,3)-0.5);
-[A B C] = meshgrid(-1:0.3:1,-1:0.3:1,-1:0.3:1);
+[A, B, C] = meshgrid(-1:0.3:1,-1:0.3:1,-1:0.3:1);
 M = cat(2,A(:),B(:),C(:));
 H = convhull(V);
 vtx_idx = unique(H(:));
 isin = isinconvexset(V,H,M);
+
 figure;
 trisurf(H,V(:,1),V(:,2),V(:,3)), shading <span class="string">faceted</span>, hold <span class="string">on</span>;
 colormap([0 1 1]);
@@ -105,9 +107,10 @@ cellfun(@(r1,r2) plot3(r1(1,1),r1(1,2),r1(1,3),<span class="string">'+'</span>,<
 set(gcf,<span class="string">'Color'</span>,[0 0 0]), set(gca,<span class="string">'Color'</span>,[0 0 0],<span class="string">'XColor'</span>,[1 1 1],<span class="string">'YColor'</span>,[1 1 1],<span class="string">'ZColor'</span>,[1 1 1],<span class="string">'FontSize'</span>,16);
 ax = gca;
 ax.Clipping = <span class="string">'off'</span>;
-alpha(0.2);
+alpha(0.4);
 xlabel(<span class="string">'X'</span>), ylabel(<span class="string">'Y'</span>), zlabel(<span class="string">'Z'</span>);
 axis <span class="string">equal</span>, axis <span class="string">tight</span>;
+camlight <span class="string">left</span>;
 </pre><img vspace="5" hspace="5" src="doc_02.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019b</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% isinconvexset
@@ -115,7 +118,7 @@ axis <span class="string">equal</span>, axis <span class="string">tight</span>;
 % Function to check if a vertex is located inside or outside a given
 % convex set, boundary not included (opened set). Supports dimensions 2 and 3.
 %
-% Author & support : nicolas.douillet (at) free.fr, 2018-2020.
+% Author & support : nicolas.douillet (at) free.fr, 2018-2023.
 %
 %% Syntax
 %
@@ -130,7 +133,9 @@ axis <span class="string">equal</span>, axis <span class="string">tight</span>;
 %
 %% See also 
 %
-% <https://fr.mathworks.com/help/matlab/ref/convhull.html?s_tid=srchtitle convhull>
+% | <https://fr.mathworks.com/help/matlab/ref/convhull.html?s_tid=srchtitle convhull> |
+%   <https://fr.mathworks.com/matlabcentral/fileexchange/122962-isinside2dset isinside2dset> |
+%   <https://fr.mathworks.com/help/matlab/ref/inpolygon.html?searchHighlight=inpolygon&s_tid=srchtitle_inpolygon_1 inpolygon> |
 %
 %% Input arguments
 %
@@ -139,8 +144,10 @@ axis <span class="string">equal</span>, axis <span class="string">tight</span>;
 %        [ |  |  |]
 %
 %        [ |  |]
-% - H = [i1 i2], positive integer matrix double, the hyperplane set (edge list in 2D, face list in 3D). Size(H) = [nb_hyperplanes,2].
+% - H = [i1 i2], positive integer matrix double, the hyperplane set (edge list in 2D, face list in 3D). 
 %        [ |  |]
+%
+%                H elements / rows don't need to be coherently oriented. Size(H) = [nb_hyperplanes,2].
 %
 %        [ |  |  |]
 % - M = [Mx My Mz], real row vector or matrix double, the coordinates of the vertex / vertices  to check. Size(M,2) = size(V,2).
@@ -155,15 +162,16 @@ axis <span class="string">equal</span>, axis <span class="string">tight</span>;
 %
 %
 %% Example #1 : 2D convex hull of random point cloud
-N = 16;
+N = 28;
 V = 2*(rand(N,2)-0.5);
 H_raw = convhull(V);
 nh = numel(H_raw);
 H = repelem(H_raw',cat(2,1,2*ones(1,nh-2),1));
 H = reshape(H,[2,nh-1])';
-[A B] = meshgrid(-1:0.1:1);
+[A, B] = meshgrid(-1:0.1:1);
 M = cat(2,A(:),B(:));
 isin = isinconvexset(V,H,M);
+
 figure
 line(V(H_raw,1),V(H_raw,2),'Color',[0 0 1],'LineWidth',2), hold on;
 ColorSpec = num2cell(cat(2,~isin,isin,zeros(size(isin,1),1)),2);
@@ -175,11 +183,12 @@ axis equal, axis tight;
 %% Example #2 : 3D convex hull of random point cloud
 N = 32;
 V = 2*(rand(N,3)-0.5);
-[A B C] = meshgrid(-1:0.3:1,-1:0.3:1,-1:0.3:1);
+[A, B, C] = meshgrid(-1:0.3:1,-1:0.3:1,-1:0.3:1);
 M = cat(2,A(:),B(:),C(:));
 H = convhull(V);
 vtx_idx = unique(H(:));
 isin = isinconvexset(V,H,M);
+
 figure;
 trisurf(H,V(:,1),V(:,2),V(:,3)), shading faceted, hold on;
 colormap([0 1 1]);
@@ -188,8 +197,9 @@ cellfun(@(r1,r2) plot3(r1(1,1),r1(1,2),r1(1,3),'+','Color',r2,'MarkerSize',4,'Li
 set(gcf,'Color',[0 0 0]), set(gca,'Color',[0 0 0],'XColor',[1 1 1],'YColor',[1 1 1],'ZColor',[1 1 1],'FontSize',16);
 ax = gca;
 ax.Clipping = 'off';
-alpha(0.2);
+alpha(0.4);
 xlabel('X'), ylabel('Y'), zlabel('Z');
 axis equal, axis tight;
+camlight left;
 ##### SOURCE END #####
 --></body></html>

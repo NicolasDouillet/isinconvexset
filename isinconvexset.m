@@ -1,8 +1,8 @@
-function [isin] = isinconvexset(V, H, M)
+function isin = isinconvexset(V, H, M)
 %% isinconvexset : function to check if a vertex is located inside or outside a given
 % convex set, boundary not included (opened set). Supports dimensions 2 and 3.
 %
-% Author & support : nicolas.douillet (at) free.fr, 2018-2020.
+% Author & support : nicolas.douillet (at) free.fr, 2018-2023.
 %
 %
 % Syntax
@@ -46,7 +46,7 @@ function [isin] = isinconvexset(V, H, M)
 %
 %
 % Example #1 : 2D convex hull of random point cloud
-% N = 16;
+% N = 28;
 % V = 2*(rand(N,2)-0.5);
 %
 % H_raw = convhull(V);
@@ -88,16 +88,20 @@ function [isin] = isinconvexset(V, H, M)
 % set(gcf,'Color',[0 0 0]), set(gca,'Color',[0 0 0],'XColor',[1 1 1],'YColor',[1 1 1],'ZColor',[1 1 1],'FontSize',16);
 % ax = gca;
 % ax.Clipping = 'off';
-% alpha(0.2);
+% alpha(0.4);
 % xlabel('X'), ylabel('Y'), zlabel('Z');
 % axis equal, axis tight;
+% camlight left;
 
 
+%% Input parsing
 assert(nargin > 2,'Not enought input arguments.');
+assert(nargin < 4,'Too many input arguments.');
+assert(isequal(size(V,2),size(H,2),size(M,2)),'All the inputs must have the same number of colums (two or three here).');
 
 
 %% Body
-epsilon = 1e4*eps;
+% epsilon = 1e4*eps;
 [~,dim] = size(V);
 G = mean(V,1);
 nb_h = size(H,1);
@@ -108,14 +112,16 @@ Gh = cell2mat(cellfun(@(r) mean(V(r,:),1),num2cell(H,2),'un',0));
 if dim == 2 % 2D
     
     % Face normals
-    H1 = V(H(:,1),:);
-    H2 = V(H(:,2),:);
-    n = [H1(:,2)-H2(:,2), H2(:,1)-H1(:,1)];        
+    H1 = V(H(:,1),:); % X
+    H2 = V(H(:,2),:); % Y
+    n = [H1(:,2)-H2(:,2), H2(:,1)-H1(:,1)]; % = [yA-yB; xB-xA]        
     
 elseif dim == 3 % 3D
     
     % Face normals
-    n = cross(V(H(:,2),:)-V(H(:,1),:),V(H(:,3),:)-V(H(:,1),:));        
+    n = cross(V(H(:,2),:)-V(H(:,1),:),V(H(:,3),:)-V(H(:,1),:));
+    
+    % False 3D case detection    
     
 else
     
@@ -136,7 +142,7 @@ if ~isequal(orientation,-ones(nb_h,1)) && ~isequal(orientation,ones(nb_h,1))
 end
 
 % Signed dot product
-sdot_prod = cellfun(@(c) sign(dot(c,n,2).*(abs(dot(c,n,2)) > epsilon)),Gv,'un',0);
+sdot_prod = cellfun(@(c) sign(dot(c,n,2)),Gv,'un',0);
 
 % Compute isin logical value
 isin = cell2mat(cellfun(@(c) isequal(c,ones(nb_h,1)) || ...
