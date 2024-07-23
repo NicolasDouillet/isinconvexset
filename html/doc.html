@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>isinconvexset</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2023-01-22"><meta name="DC.source" content="doc.m"><style type="text/css">
+      --><title>isinconvexset</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2024-07-23"><meta name="DC.source" content="doc.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -66,7 +66,7 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1>isinconvexset</h1><!--introduction--><p>Function to check if a vertex is located inside or outside a given convex set, boundary not included (opened set). Supports dimensions 2 and 3.</p><p>Author &amp; support : nicolas.douillet (at) free.fr, 2018-2023.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">See also</a></li><li><a href="#4">Input arguments</a></li><li><a href="#5">Output argument</a></li><li><a href="#6">Example #1 : 2D convex hull of random point cloud</a></li><li><a href="#7">Example #2 : 3D convex hull of random point cloud</a></li></ul></div><h2 id="1">Syntax</h2><p>isin = isinconvexset(V, H, M);</p><h2 id="2">Description</h2><p>isin = isinconvexset(V, H, M) computes the boolean isin which is true/logical 1 in the case the vertex M belongs to the opened convex set (V,H) defined by the vertex set V, and its hyperplane set H. isin is false/logical 0 in the case vertex M belongs to the complementary set or the boundary convex hull.</p><h2 id="3">See also</h2><p>| <a href="https://fr.mathworks.com/help/matlab/ref/convhull.html?s_tid=srchtitle">convhull</a> |   <a href="https://fr.mathworks.com/matlabcentral/fileexchange/122962-isinside2dset">isinside2dset</a> |   <a href="https://fr.mathworks.com/help/matlab/ref/inpolygon.html?searchHighlight=inpolygon&amp;s_tid=srchtitle_inpolygon_1">inpolygon</a> |</p><h2 id="4">Input arguments</h2><pre>      [ |  |  |]
+  </style></head><body><div class="content"><h1>isinconvexset</h1><!--introduction--><p>Function to check if a vertex is located inside or outside a given convex set, boundary not included (opened set). Supports dimensions 2 and 3.</p><p>Author : nicolas.douillet9 (at) gmail.com, 2018-2024.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">See also</a></li><li><a href="#4">Input arguments</a></li><li><a href="#5">Output argument</a></li><li><a href="#6">Example #1 : 2D convex hull of random point cloud</a></li><li><a href="#7">Example #2 : 3D convex hull of random point cloud</a></li></ul></div><h2 id="1">Syntax</h2><p>isin = isinconvexset(V, H, M);</p><h2 id="2">Description</h2><p>isin = isinconvexset(V, H, M) computes the boolean isin which is true/logical 1 in the case the vertex M belongs to the opened convex set (V,H) defined by the vertex set V, and its hyperplane set H. isin is false/logical 0 in the case vertex M belongs to the complementary set or the boundary convex hull.</p><h2 id="3">See also</h2><p>| <a href="https://fr.mathworks.com/help/matlab/ref/convhull.html?s_tid=srchtitle">convhull</a> |   <a href="https://fr.mathworks.com/matlabcentral/fileexchange/122962-isinside2dset">isinside2dset</a> |   <a href="https://fr.mathworks.com/help/matlab/ref/inpolygon.html?searchHighlight=inpolygon&amp;s_tid=srchtitle_inpolygon_1">inpolygon</a> |</p><h2 id="4">Input arguments</h2><pre>      [ |  |  |]
 - V = [Vx Vy Vz], real matrix double, the convex set, with size(V,1) &gt; size(V,2) to define a relevant convex set.
       [ |  |  |]</pre><pre>      [ |  |]
 - H = [i1 i2], positive integer matrix double, the hyperplane set (edge list in 2D, face list in 3D).
@@ -118,7 +118,7 @@ camlight <span class="string">left</span>;
 % Function to check if a vertex is located inside or outside a given
 % convex set, boundary not included (opened set). Supports dimensions 2 and 3.
 %
-% Author & support : nicolas.douillet (at) free.fr, 2018-2023.
+% Author : nicolas.douillet9 (at) gmail.com, 2018-2024.
 %
 %% Syntax
 %

@@ -3,7 +3,7 @@
 % Function to check if a vertex is located inside or outside a given
 % convex set, boundary not included (opened set). Supports dimensions 2 and 3.
 %
-% Author & support : nicolas.douillet (at) free.fr, 2018-2023.
+% Author : nicolas.douillet9 (at) gmail.com, 2018-2024.
 %
 %% Syntax
 %
