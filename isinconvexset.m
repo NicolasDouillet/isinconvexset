@@ -2,7 +2,7 @@ function isin = isinconvexset(V, H, M)
 %% isinconvexset : function to check if a vertex is located inside or outside a given
 % convex set, boundary not included (opened set). Supports dimensions 2 and 3.
 %
-% Author : nicolas.douillet9 (at) gmail.com, 2018-2024.
+% Author : nicolas.douillet9 (at) gmail.com, 2018-2025.
 %
 %
 % Syntax
@@ -54,8 +54,8 @@ function isin = isinconvexset(V, H, M)
 % H = repelem(H_raw',cat(2,1,2*ones(1,nh-2),1));
 % H = reshape(H,[2,nh-1])';
 %
-% [A B] = meshgrid(-1:0.1:1);
-% M = cat(2,A(:),B(:));
+% nb_pts = 800;
+% M = 2*(rand(nb_pts,2)-0.5);
 %
 % isin = isinconvexset(V,H,M);
 %
@@ -72,8 +72,8 @@ function isin = isinconvexset(V, H, M)
 % N = 32;
 % V = 2*(rand(N,3)-0.5);
 %
-% [A B C] = meshgrid(-1:0.3:1,-1:0.3:1,-1:0.3:1);
-% M = cat(2,A(:),B(:),C(:));
+% nb_pts = 1e3;
+% M = 2*(rand(1e3,3)-0.5);
 %
 % H = convhull(V);
 % vtx_idx = unique(H(:));
